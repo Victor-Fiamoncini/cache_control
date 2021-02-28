@@ -7,6 +7,7 @@
   },
   "license": "MIT",
   "scripts": {
+		"test": "jest --no-cache --watchAll",
     "build": "tsc"
   },
   "devDependencies": {
