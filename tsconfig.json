@@ -1,0 +1,22 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+		"strict": true,
+		"allowJs": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+		"forceConsistentCasingInFileNames": true,
+		"experimentalDecorators": true,
+		"emitDecoratorMetadata": true,
+		"strictPropertyInitialization": false,
+		"rootDir": ".",
+		"outDir": "./build",
+		"baseUrl": "./src",
+		"paths": {
+			"@tests/*": ["tests/*"]
+		}
+	},
+	"include": ["./src"],
+	"exclude": ["node_modules"]
+}
