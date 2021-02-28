@@ -14,7 +14,7 @@
 		"outDir": "./build",
 		"baseUrl": "./src",
 		"paths": {
-			"@tests/*": ["tests/*"]
+			"@/*": ["/*"]
 		}
 	},
 	"include": ["./src"],
