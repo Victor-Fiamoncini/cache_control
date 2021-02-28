@@ -11,10 +11,10 @@
 		"emitDecoratorMetadata": true,
 		"strictPropertyInitialization": false,
 		"rootDir": ".",
+		"baseUrl": ".",
 		"outDir": "./build",
-		"baseUrl": "./src",
 		"paths": {
-			"@/*": ["/*"]
+			"@/*": ["src/*"]
 		}
 	},
 	"include": ["./src"],
