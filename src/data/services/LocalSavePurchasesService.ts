@@ -4,8 +4,8 @@ import { SavePurchasesUseCase } from '@domain/usecases'
 export class LocalSavePurchasesService implements SavePurchasesUseCase {
 	constructor(private readonly cacheStore: CacheStore) {}
 
-	async savePurchases(): Promise<void> {
+	async savePurchases(purchases: SavePurchasesUseCase.Params[]): Promise<void> {
 		this.cacheStore.delete('purchases')
-		this.cacheStore.insert('purchases')
+		this.cacheStore.insert('purchases', purchases)
 	}
 }

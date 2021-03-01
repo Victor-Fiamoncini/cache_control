@@ -1,8 +1,8 @@
-namespace SavePurchasesUseCase {
+export namespace SavePurchasesUseCase {
 	export type Params = {
 		id: string
 		date: Date
-		price: number
+		value: number
 	}
 }
 
