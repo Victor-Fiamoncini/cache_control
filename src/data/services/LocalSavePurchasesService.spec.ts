@@ -1,5 +1,6 @@
 import { CacheStore } from '@data/contracts'
 import { LocalSavePurchasesService } from '@data/services'
+import { mockPurchases } from '@data/tests'
 import { SavePurchasesUseCase } from '@domain/usecases'
 
 class CacheStoreSpy implements CacheStore {
@@ -31,21 +32,6 @@ class CacheStoreSpy implements CacheStore {
 			throw new Error()
 		})
 	}
-}
-
-function mockPurchases(): SavePurchasesUseCase.Params[] {
-	return [
-		{
-			id: 'any_id_01',
-			date: new Date(),
-			value: 50,
-		},
-		{
-			id: 'any_id_02',
-			date: new Date(),
-			value: 20,
-		},
-	]
 }
 
 type SutTypes = {
