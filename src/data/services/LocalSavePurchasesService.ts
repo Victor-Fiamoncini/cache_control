@@ -6,5 +6,6 @@ export class LocalSavePurchasesService implements SavePurchasesUseCase {
 
 	async savePurchases(): Promise<void> {
 		this.cacheStore.delete('purchases')
+		this.cacheStore.insert('purchases')
 	}
 }
