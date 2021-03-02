@@ -1,9 +1,7 @@
+import { Purchase } from '@domain/entities'
+
 export namespace SavePurchasesUseCase {
-	export type Params = {
-		id: string
-		date: Date
-		value: number
-	}
+	export type Params = Purchase
 }
 
 export interface SavePurchasesUseCase {
