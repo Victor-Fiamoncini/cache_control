@@ -8,8 +8,7 @@ export class LocalSavePurchasesService implements SavePurchasesUseCase {
 	) {}
 
 	async savePurchases(purchases: SavePurchasesUseCase.Params[]): Promise<void> {
-		this.cacheStore.delete('purchases')
-		this.cacheStore.insert('purchases', {
+		this.cacheStore.replace('purchases', {
 			timestamp: this.timestamp,
 			value: purchases,
 		})
