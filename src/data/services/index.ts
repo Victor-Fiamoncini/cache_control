@@ -1,1 +1,1 @@
-export * from '@data/services/LocalSavePurchasesService'
+export * from '@data/services/LocalLoadPurchasesService'

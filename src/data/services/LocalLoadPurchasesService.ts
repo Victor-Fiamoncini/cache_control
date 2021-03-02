@@ -1,7 +1,7 @@
 import { CacheStore } from '@data/contracts'
 import { SavePurchasesUseCase } from '@domain/usecases'
 
-export class LocalSavePurchasesService implements SavePurchasesUseCase {
+export class LocalLoadPurchasesService implements SavePurchasesUseCase {
 	constructor(
 		private readonly cacheStore: CacheStore,
 		private readonly timestamp: Date

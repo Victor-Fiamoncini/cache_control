@@ -1,15 +1,15 @@
-import { LocalSavePurchasesService } from '@data/services'
+import { LocalLoadPurchasesService } from '@data/services'
 import { CacheStoreSpy, mockPurchases } from '@tests/data/mocks'
 
 type SutTypes = {
-	sut: LocalSavePurchasesService
+	sut: LocalLoadPurchasesService
 	cacheStore: CacheStoreSpy
 }
 
 function makeSut(timestamp = new Date()): SutTypes {
 	const cacheStoreSpy = new CacheStoreSpy()
 
-	const sut = new LocalSavePurchasesService(cacheStoreSpy, timestamp)
+	const sut = new LocalLoadPurchasesService(cacheStoreSpy, timestamp)
 
 	return {
 		sut,
@@ -17,7 +17,7 @@ function makeSut(timestamp = new Date()): SutTypes {
 	}
 }
 
-describe('LocalSavePurchasesService', () => {
+describe('LocalLoadPurchasesService', () => {
 	test('should not delete or insert cache on sut.init', () => {
 		const { cacheStore } = makeSut()
 
