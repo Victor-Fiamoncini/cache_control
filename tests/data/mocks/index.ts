@@ -1,2 +1,2 @@
 export * from '@tests/data/mocks/MockPurchases'
-export * from '@tests/data/mocks/MockCache'
+export * from '@tests/data/mocks/CacheStoreSpy'
