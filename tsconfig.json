@@ -10,14 +10,15 @@
 		"experimentalDecorators": true,
 		"emitDecoratorMetadata": true,
 		"strictPropertyInitialization": false,
-		"rootDir": ".",
 		"outDir": "./build",
-		"baseUrl": "./src",
+		"rootDir": ".",
+		"baseUrl": ".",
 		"paths": {
-			"@data/*": ["data/*"],
-			"@domain/*": ["domain/*"]
+			"@data/*": ["src/data/*"],
+			"@domain/*": ["src/domain/*"],
+			"@tests/*": ["tests/*"]
 		}
 	},
-	"include": ["./src"],
+	"include": ["./src", "tests"],
 	"exclude": ["node_modules"]
 }

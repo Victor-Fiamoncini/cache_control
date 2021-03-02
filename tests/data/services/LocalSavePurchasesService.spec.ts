@@ -1,5 +1,5 @@
 import { LocalSavePurchasesService } from '@data/services'
-import { CacheStoreSpy, mockPurchases } from '@data/tests'
+import { CacheStoreSpy, mockPurchases } from '@tests/data/mocks'
 
 type SutTypes = {
 	sut: LocalSavePurchasesService
