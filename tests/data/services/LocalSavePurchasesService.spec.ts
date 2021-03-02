@@ -6,10 +6,10 @@ type SutTypes = {
 	cacheStore: CacheStoreSpy
 }
 
-function makeSut(): SutTypes {
+function makeSut(timestamp = new Date()): SutTypes {
 	const cacheStoreSpy = new CacheStoreSpy()
 
-	const sut = new LocalSavePurchasesService(cacheStoreSpy)
+	const sut = new LocalSavePurchasesService(cacheStoreSpy, timestamp)
 
 	return {
 		sut,
@@ -24,19 +24,7 @@ describe('LocalSavePurchasesService', () => {
 		expect(cacheStore.messages).toEqual([])
 	})
 
-	test('should delete old cache on sut.save', async () => {
-		const { sut, cacheStore } = makeSut()
-
-		await sut.savePurchases(mockPurchases())
-
-		expect(cacheStore.messages).toEqual([
-			CacheStoreSpy.Message.delete,
-			CacheStoreSpy.Message.insert,
-		])
-		expect(cacheStore.deleteKey).toBe('purchases')
-	})
-
-	test('should not insert new cache if the delete fails', () => {
+	test('should not insert new cache if the delete fails', async () => {
 		const { sut, cacheStore } = makeSut()
 
 		cacheStore.simulateDeleteError()
@@ -44,11 +32,12 @@ describe('LocalSavePurchasesService', () => {
 		const promise = sut.savePurchases(mockPurchases())
 
 		expect(cacheStore.messages).toEqual([CacheStoreSpy.Message.delete])
-		expect(promise).rejects.toThrow()
+		await expect(promise).rejects.toThrow()
 	})
 
 	test('should insert new cache if delete succeeds', async () => {
-		const { sut, cacheStore } = makeSut()
+		const timestamp = new Date()
+		const { sut, cacheStore } = makeSut(timestamp)
 
 		const purchases = mockPurchases()
 
@@ -58,11 +47,15 @@ describe('LocalSavePurchasesService', () => {
 			CacheStoreSpy.Message.delete,
 			CacheStoreSpy.Message.insert,
 		])
+		expect(cacheStore.deleteKey).toBe('purchases')
 		expect(cacheStore.insertKey).toBe('purchases')
-		expect(cacheStore.insertValues).toEqual(purchases)
+		expect(cacheStore.insertValues).toEqual({
+			timestamp,
+			value: purchases,
+		})
 	})
 
-	test('should throw if insert throws', () => {
+	test('should throw if insert throws', async () => {
 		const { sut, cacheStore } = makeSut()
 
 		cacheStore.simulateInsertError()
@@ -72,6 +65,6 @@ describe('LocalSavePurchasesService', () => {
 			CacheStoreSpy.Message.delete,
 			CacheStoreSpy.Message.insert,
 		])
-		expect(promise).rejects.toThrow()
+		await expect(promise).rejects.toThrow()
 	})
 })
