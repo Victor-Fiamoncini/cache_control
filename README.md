@@ -1,6 +1,6 @@
 # Cache Control Service
 
-Simple LocalStorage cache control service, implemented with clean architecture & TDD
+Simple Load/Save cache control service, implemented with clean architecture & TDD
 
 ## How to start
 

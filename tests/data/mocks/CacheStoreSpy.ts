@@ -44,5 +44,6 @@ export namespace CacheStoreSpy {
 	export enum Action {
 		delete,
 		insert,
+		fetch,
 	}
 }

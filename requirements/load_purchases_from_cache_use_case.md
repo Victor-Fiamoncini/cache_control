@@ -11,7 +11,7 @@
 ## Exception - Expired Cache
 
 - Software cleans the cache
-- Software returns an error
+- Software returns an empty list
 
 ## Exception - Empty Cache
 
