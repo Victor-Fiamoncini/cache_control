@@ -1,4 +1,4 @@
-import { CacheStore } from '@data/contracts'
+import { CachePolicy, CacheStore } from '@data/contracts'
 import { LoadPurchasesUseCase, SavePurchasesUseCase } from '@domain/usecases'
 
 // prettier-ignore
@@ -20,11 +20,8 @@ export class LocalLoadPurchasesService implements SavePurchasesUseCase, LoadPurc
 	async loadPurchases(): Promise<LoadPurchasesUseCase.Result[]> {
 		try {
 			const cache = this.cacheStore.fetch(this.key)
-			const maxAge = new Date(cache.timestamp)
 
-			maxAge.setDate(maxAge.getDate() + 3)
-
-			if (maxAge > this.currentDate) {
+			if (CachePolicy.validate(cache.timestamp, this.currentDate)) {
 				return cache.value
 			}
 
