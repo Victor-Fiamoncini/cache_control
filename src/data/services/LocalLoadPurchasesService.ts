@@ -25,11 +25,19 @@ export class LocalLoadPurchasesService implements SavePurchasesUseCase, LoadPurc
 				return cache.value
 			}
 
-			throw new Error()
-		} catch {
 			this.cacheStore.delete(this.key)
 
 			return []
+		} catch {
+			return []
+		}
+	}
+
+	validate(): void {
+		try {
+			this.cacheStore.fetch(this.key)
+		} catch {
+			this.cacheStore.delete(this.key)
 		}
 	}
 }

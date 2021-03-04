@@ -21,7 +21,7 @@ function makeSut(timestamp = new Date()): SutTypes {
 	}
 }
 
-describe('LocalLoadPurchasesService', () => {
+describe('LocalLoadPurchases', () => {
 	test('should not delete or insert cache on sut.init', () => {
 		const { cacheStore } = makeSut()
 
@@ -34,12 +34,8 @@ describe('LocalLoadPurchasesService', () => {
 		cacheStore.simulateFetchError()
 		const purchases = await sut.loadPurchases()
 
-		expect(cacheStore.actions).toEqual([
-			CacheStoreSpy.Action.fetch,
-			CacheStoreSpy.Action.delete,
-		])
+		expect(cacheStore.actions).toEqual([CacheStoreSpy.Action.fetch])
 		expect(purchases).toEqual([])
-		expect(cacheStore.deleteKey).toEqual('purchases')
 	})
 
 	test('should return a list of purchases if cache is valid', async () => {
