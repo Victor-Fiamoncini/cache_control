@@ -25,8 +25,6 @@ export class LocalLoadPurchasesService implements SavePurchasesUseCase, LoadPurc
 				return cache.value
 			}
 
-			this.cacheStore.delete(this.key)
-
 			return []
 		} catch {
 			return []
@@ -35,7 +33,11 @@ export class LocalLoadPurchasesService implements SavePurchasesUseCase, LoadPurc
 
 	validate(): void {
 		try {
-			this.cacheStore.fetch(this.key)
+			const cache = this.cacheStore.fetch(this.key)
+
+			if (!CachePolicy.validate(cache.timestamp, this.currentDate)) {
+				throw new Error()
+			}
 		} catch {
 			this.cacheStore.delete(this.key)
 		}
