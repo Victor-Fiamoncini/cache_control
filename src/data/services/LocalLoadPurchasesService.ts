@@ -19,9 +19,9 @@ export class LocalLoadPurchasesService implements SavePurchasesUseCase, LoadPurc
 
 	async loadPurchases(): Promise<LoadPurchasesUseCase.Result[]> {
 		try {
-			this.cacheStore.fetch(this.key)
+			const cache = this.cacheStore.fetch(this.key)
 
-			return []
+			return cache.value
 		} catch {
 			this.cacheStore.delete(this.key)
 
