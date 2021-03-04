@@ -1,6 +1,6 @@
 # Cache Control Service
 
-Simple Load/Save cache control service, implemented with clean architecture & TDD
+Load/Save cache control service, implemented with clean architecture & TDD
 
 ## How to start
 
