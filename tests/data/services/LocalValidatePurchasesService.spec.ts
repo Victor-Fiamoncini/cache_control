@@ -1,5 +1,5 @@
 import { LocalLoadPurchasesService } from '@data/services'
-import { CacheStoreSpy } from '@tests/data/mocks'
+import { CacheStoreSpy, getCacheExpirationDate } from '@tests/data/mocks'
 
 type SutTypes = {
 	sut: LocalLoadPurchasesService
@@ -28,12 +28,29 @@ describe('LocalValidatePurchases', () => {
 		const { cacheStore, sut } = makeSut()
 
 		cacheStore.simulateFetchError()
-		sut.loadPurchases()
+		sut.validate()
 
 		expect(cacheStore.actions).toEqual([
 			CacheStoreSpy.Action.fetch,
 			CacheStoreSpy.Action.delete,
 		])
 		expect(cacheStore.deleteKey).toEqual('purchases')
+	})
+
+	test('should has no side effect if load succeeds', () => {
+		const currentDate = new Date()
+		const timestamp = getCacheExpirationDate(currentDate)
+		timestamp.setSeconds(timestamp.getSeconds() + 1)
+
+		const { cacheStore, sut } = makeSut(timestamp)
+
+		cacheStore.fetchResult = {
+			timestamp,
+		}
+
+		sut.validate()
+
+		expect(cacheStore.actions).toEqual([CacheStoreSpy.Action.fetch])
+		expect(cacheStore.fetchKey).toBe('purchases')
 	})
 })
