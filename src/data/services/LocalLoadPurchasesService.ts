@@ -7,12 +7,12 @@ export class LocalLoadPurchasesService implements SavePurchasesUseCase, LoadPurc
 
 	constructor(
 		private readonly cacheStore: CacheStore,
-		private readonly timestamp: Date
+		private readonly currentDate: Date
 	) {}
 
 	async savePurchases(purchases: SavePurchasesUseCase.Params[]): Promise<void> {
 		this.cacheStore.replace(this.key, {
-			timestamp: this.timestamp,
+			timestamp: this.currentDate,
 			value: purchases,
 		})
 	}
@@ -20,8 +20,15 @@ export class LocalLoadPurchasesService implements SavePurchasesUseCase, LoadPurc
 	async loadPurchases(): Promise<LoadPurchasesUseCase.Result[]> {
 		try {
 			const cache = this.cacheStore.fetch(this.key)
+			const maxAge = new Date(cache.timestamp)
 
-			return cache.value
+			maxAge.setDate(maxAge.getDate() + 3)
+
+			if (maxAge > this.currentDate) {
+				return cache.value
+			}
+
+			throw new Error()
 		} catch {
 			this.cacheStore.delete(this.key)
 
