@@ -10,7 +10,6 @@
 
 ## Exception - Expired Cache
 
-- Software cleans the cache
 - Software returns an empty list
 
 ## Exception - Empty Cache
@@ -19,5 +18,4 @@
 
 ## Exception - Error to load cache data
 
-- Software cleans the cache
 - Software returns an error

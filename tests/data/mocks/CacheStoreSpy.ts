@@ -1,10 +1,12 @@
 import { CacheStore } from '@data/contracts'
 import { SavePurchasesUseCase } from '@domain/usecases'
 
+const maxAgeInDays = 3
+
 export function getCacheExpirationDate(timestamp: Date): Date {
 	const maxCacheAge = new Date(timestamp)
 
-	maxCacheAge.setDate(maxCacheAge.getDate() - 3)
+	maxCacheAge.setDate(maxCacheAge.getDate() - maxAgeInDays)
 
 	return maxCacheAge
 }
