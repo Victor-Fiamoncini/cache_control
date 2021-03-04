@@ -16,3 +16,8 @@
 ## Exception - Empty Cache
 
 - Software returns an error
+
+## Exception - Error to load cache data
+
+- Software cleans the cache
+- Software returns an error

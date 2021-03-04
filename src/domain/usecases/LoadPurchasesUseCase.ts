@@ -5,5 +5,5 @@ export namespace LoadPurchasesUseCase {
 }
 
 export interface LoadPurchasesUseCase {
-	loadAllPurchases(): Promise<LoadPurchasesUseCase.Result[]>
+	loadPurchases(): Promise<LoadPurchasesUseCase.Result[]>
 }
